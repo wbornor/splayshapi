@@ -29,7 +29,7 @@ class ItemsRouter:
         #     return self.__items_domain.create_recipe(items_model)
 
         @api_router.get('/get/{item_id}', summary='Fetch an item by id')
-        def get_item(item_id: str) -> list[ItemModel]:
+        def get_item(item_id: str) -> ItemModel:
             try:
                 return self.__items_domain.get_item(item_id)
             except KeyError:

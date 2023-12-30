@@ -12,12 +12,12 @@ from app.repository.items import ItemsRepository
 class ItemModel(BaseModel):
     id: str = Field(..., example='talknut.6a05a9ba3f8c478bf79b57724023dd6afc9d06531317049cff83305fc3example')
     title: str = Field(..., example='@wbornor')
-    content: str = Field(..., example='hello world')
+    content: Optional[str] = Field(None, example='hello world')
     create_date: str = Field(..., example='2023-12-30 20:42:25')
-    is_public: int = Field(..., example='1')
-    nut_id: int = Field(..., example='1')
+    is_public: Decimal = Field(..., example='1')
+    nut_id: Decimal = Field(..., example='1')
     nut_type: NutType = Field(..., example='TALKNUT')
-    url: str = Field(..., example='https://twitter.com/wbornor/status/775853964348694528')
+    url: Optional[str] = Field(None, example='https://twitter.com/wbornor/status/775853964348694528')
 
 
 class ItemsDomain:
