@@ -5,17 +5,18 @@ from pydantic import BaseModel
 from pydantic.types import UUID4
 from typing import List, Optional
 
+from app.domain.nuttype import NutType
 from app.repository.items import ItemsRepository
 
 
-class ItemsModel(BaseModel):
+class ItemModel(BaseModel):
     id: str = Field(..., example='talknut.6a05a9ba3f8c478bf79b57724023dd6afc9d06531317049cff83305fc3example')
     title: str = Field(..., example='@wbornor')
     content: str = Field(..., example='hello world')
     create_date: str = Field(..., example='2023-12-30 20:42:25')
     is_public: int = Field(..., example='1')
     nut_id: int = Field(..., example='1')
-    nut_type: str = Field(..., example='TALKNUT')
+    nut_type: NutType = Field(..., example='TALKNUT')
     url: str = Field(..., example='https://twitter.com/wbornor/status/775853964348694528')
 
 
@@ -25,6 +26,12 @@ class ItemsDomain:
 
     def get_all(self):
         return self.__repository.get_all()
+
+    def get_all_sorted(self):
+        return self.__repository.get_all_sorted()
+
+    def get_by_nut_type_sorted(self, nut_type: NutType):
+        return self.__repository.get_by_nut_type_sorted(nut_type)
 
     def get_item(self, id: str):
         return self.__repository.get_item(id)
