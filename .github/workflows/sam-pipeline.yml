@@ -16,6 +16,12 @@ on:
         required: true
         default: 'dev'
 
+env:
+  AWS_REGION: us-east-1
+  AWS_ACCOUNT_ID: 796019718156
+  AWS_CICD_ROLE_ARN: arn:aws:iam::$AWS_ACCOUNT_ID:role/splayshapi-cicd-Role-I6ZfsEHvFThf
+  AWS_CICD_BUCKET: ${{ github.organization }}-${{ github.repository }}-deployment-bucket
+
 jobs:
   stack:
     name: Deploy stack to AWS
@@ -37,8 +43,8 @@ jobs:
         id: creds
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::796019718156:role/splayshapi-cicd-Role-I6ZfsEHvFThf
-          aws-region: "us-east-1"
+          role-to-assume: $AWS_CICD_ROLE_ARN
+          aws-region: $AWS_REGION
 
       - name: Configure environment name
         id: env-name
@@ -58,9 +64,9 @@ jobs:
           --no-confirm-changeset \
           --no-fail-on-empty-changeset \
           --stack-name ${{ steps.env-name.outputs.environment }} \
-          --s3-bucket splayshapi-deployment-bucket \
+          --s3-bucket "$AWS_CICD_BUCKET" \
           --capabilities CAPABILITY_IAM \
-          --region "us-east-1"
+          --region "$AWS_REGION"
 
 
 #      - name: Deploy splayshapi aws resources

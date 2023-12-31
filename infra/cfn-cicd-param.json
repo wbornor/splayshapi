@@ -6,5 +6,9 @@
   {
     "ParameterKey": "RepositoryName",
     "ParameterValue": "splayshapi"
+  },
+  {
+    "ParameterKey": "AppId",
+    "ParameterValue": "wbornor-splayshapi"
   }
 ]
