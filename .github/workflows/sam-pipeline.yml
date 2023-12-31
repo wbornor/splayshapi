@@ -18,8 +18,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  AWS_ACCOUNT_ID: 796019718156
-  AWS_CICD_ROLE_ARN: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/splayshapi-cicd-Role-I6ZfsEHvFThf
+  AWS_CICD_ROLE_ARN: arn:aws:iam::796019718156:role/splayshapi-cicd-Role-I6ZfsEHvFThf
   AWS_CICD_BUCKET: ${{ github.organization }}-${{ github.repository }}-deployment-bucket
 
 jobs:
@@ -32,15 +31,15 @@ jobs:
     outputs:
       env-name: ${{ steps.env-name.outputs.environment }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Configure AWS credentials
         id: creds
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ env.AWS_CICD_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Configure environment name
         id: env-name
