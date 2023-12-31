@@ -18,7 +18,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  AWS_CICD_ROLE_ARN: arn:aws:iam::796019718156:role/splayshapi-cicd-Role-I6ZfsEHvFThf
+  AWS_CICD_ROLE_ARN: arn:aws:iam::796019718156:role/splayshapi-cicd-DeployerRole-VSSNyHJoktkS
   AWS_CICD_BUCKET: ${{ github.organization }}-${{ github.repository }}-deployment-bucket
 
 jobs:
