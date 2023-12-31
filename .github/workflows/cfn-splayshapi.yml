@@ -20,9 +20,6 @@ jobs:
   cluster:
     name: Deploy stack to AWS
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCOUNT: "796019718156"
-      AWS_REGION: "us-east-1"
     outputs:
       env-name: ${{ steps.env-name.outputs.environment }}
     steps:
@@ -33,8 +30,8 @@ jobs:
         id: creds
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::$AWS_ACCOUNT:role/splayshapioidc-Role-G2VzLFsqmwcR
-          aws-region: $AWS_REGION
+          role-to-assume: arn:aws:iam::796019718156:role/splayshapioidc-Role-G2VzLFsqmwcR
+          aws-region: "us-east-1"
 
       - name: Configure environment name
         id: env-name
