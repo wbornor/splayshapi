@@ -82,6 +82,7 @@ Resources:
                   - cloudformation:UpdateStack
                   - cloudformation:UpdateTerminationProtection
                   - cloudformation:GetTemplate
+                  - cloudformation:GetTemplateSummary
                 Resource:
                   - !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AppId}-*/*'
               - Sid: ReadLambda
@@ -246,6 +247,7 @@ Resources:
                   - iam:DeleteRole
                   - iam:AttachRolePolicy
                   - iam:DeleteRolePolicy
+                  - iam:DetachRolePolicy
                   - iam:PutRolePolicy
                   - iam:TagRole
                   - iam:UntagRole
