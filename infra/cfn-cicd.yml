@@ -59,6 +59,11 @@ Resources:
                 Action:
                   - cloudformation:ValidateTemplate
                 Resource: '*'
+              - Sid: ServerlessTransforms
+                Effect: Allow
+                Action:
+                 - "cloudformation:CreateChangeSet"
+                Resource: "arn:aws:cloudformation:us-east-1:aws:transform/Serverless-2016-10-31"
               - Sid: ExecuteCloudFormation
                 Effect: "Allow"
                 Action:
@@ -78,7 +83,7 @@ Resources:
                   - cloudformation:UpdateTerminationProtection
                   - cloudformation:GetTemplate
                 Resource:
-                  - !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${GitHubOrg}/${RepositoryName}-*/*'
+                  - !Sub 'arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/${AppId}-*/*'
               - Sid: ReadLambda
                 Effect: Allow
                 Action:
@@ -372,7 +377,7 @@ Resources:
         Status: Enabled  # Optional: Enables versioning for objects in the bucket
 
 Outputs:
-  Role:
+  DeployerRole:
     Value: !GetAtt DeployerRole.Arn
   SplayshAPIDeploymentBucket:
     Value: !GetAtt SplayshAPIDeploymentBucket.Arn

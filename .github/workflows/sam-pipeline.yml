@@ -19,7 +19,7 @@ on:
 env:
   APP_ID: wbornor-splayshapi
   AWS_REGION: us-east-1
-  AWS_CICD_ROLE_ARN: arn:aws:iam::796019718156:role/splayshapi-cicd-DeployerRole-VSSNyHJoktkS
+  AWS_CICD_ROLE_ARN: arn:aws:iam::796019718156:role/splayshapi-cicd-DeployerRole-ReOfpb4FBtBc
   AWS_CICD_BUCKET: wbornor-splayshapi-deployment-bucket
 
 jobs:
