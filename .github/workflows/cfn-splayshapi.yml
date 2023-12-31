@@ -1,4 +1,4 @@
-name: Deploy splayshapi Cloudformation Resources
+name: Deploy Cloudformation Resources
 
 on:
   workflow_dispatch:
@@ -7,6 +7,14 @@ on:
         description: 'AWS Region'
         required: true
         default: 'us-east-1'
+      environment:
+        type: choice
+        options:
+          - dev
+          - prd
+        description: 'Environment (dev or prd)'
+        required: true
+        default: 'dev'
 
 jobs:
   cluster:
@@ -33,7 +41,7 @@ jobs:
         env:
           REPO: ${{ github.repository }}
         run: |
-          ENVIRONMENT=`echo $REPO | tr "/" "-"`
+          ENVIRONMENT=`echo $REPO-${{ github.event.inputs.environment }} | tr "/" "-" `
           echo "Environment name: $ENVIRONMENT"
           echo "environment=$ENVIRONMENT" >> $GITHUB_OUTPUT
 
