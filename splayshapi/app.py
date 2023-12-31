@@ -1,12 +1,16 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
+from mangum import Mangum
 
-from app.db import initialize_db
-from app.domain.items import ItemsDomain
-from app.repository.items import ItemsRepository
-from app.routers.items import ItemsRouter
+
+from splayshapi.db import initialize_db
+from splayshapi.domain.items import ItemsDomain
+from splayshapi.repository.items import ItemsRepository
+from splayshapi.routers.items import ItemsRouter
 
 app = FastAPI()
+
+lambda_handler = Mangum(app, lifespan="off")
 
 db = initialize_db()
 items_repository = ItemsRepository(db)

@@ -3,9 +3,9 @@ set -xe
 
 export REGION="us-east-1";
 export AWS_CLI_PROFILE="default";
-export CFN="cfn-oidc.yml";
-export CFN_PARAM_JSON="cfn-oidc-param.json";
-export APP_NAME="splayshapioidc";
+export CFN="cfn-cicd.yml";
+export CFN_PARAM_JSON="cfn-cicd-param.json";
+export APP_NAME="splayshapi-cicd";
 export STACK_NAME="$APP_NAME";
 export NOW=`date +%y%m%d%H%M%S`;
 

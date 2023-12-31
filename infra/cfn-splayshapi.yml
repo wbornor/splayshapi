@@ -1,0 +1,68 @@
+Parameters:
+  Environment:
+    Description: Name of GitHub organization/user (case sensitive)
+    Type: String
+    Default: "dev"
+  DynamoDBTableArnItem:
+    Description: Arn of Item Table
+    Type: String
+    Default: "dev"
+
+Resources:
+  SplayshAPILambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: splayshapi
+      Handler: lambda_function.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        ZipFile: |
+          import boto3
+          import json
+
+          def lambda_handler(event, context):
+              dynamodb = boto3.resource('dynamodb')
+              table = dynamodb.Table('MyDynamoDBTable')
+
+              # Example: Read from DynamoDB
+              response = table.get_item(
+                  Key={
+                      'id': 'some_id'
+                  }
+              )
+              item = response['Item']
+              print("Retrieved Item:", item)
+
+              # Example: Write to DynamoDB
+              table.put_item(
+                  Item={
+                      'id': 'some_id',
+                      'data': 'some_data'
+                  }
+              )
+
+              return {
+                  'statusCode': 200,
+                  'body': json.dumps('Successfully executed Lambda!')
+              }
+
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaDynamoDBPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                Resource: !Ref DynamoDBTableArnItem

@@ -51,6 +51,15 @@ Resources:
                   - "cloudformation:DeleteChangeSet"
                   - "cloudformation:ExecuteChangeSet"
                 Resource: "*"
+      - PolicyName: "S3Policy"
+        PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                Resource: !GetAtt SplayshAPIDeploymentBucket.Arn
 
 
   GithubOidc:
@@ -63,6 +72,16 @@ Resources:
       ThumbprintList:
         - ffffffffffffffffffffffffffffffffffffffff
 
+  SplayshAPIDeploymentBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: splayshapi-deployment-bucket
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Enabled  # Optional: Enables versioning for objects in the bucket
+
 Outputs:
   Role:
     Value: !GetAtt Role.Arn
+  SplayshAPIDeploymentBucket:
+    Value: !GetAtt SplayshAPIDeploymentBucket.Arn

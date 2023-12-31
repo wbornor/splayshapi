@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi import HTTPException
 
-from app.domain.items import ItemsDomain, ItemModel, NutType
+from splayshapi.domain.items import ItemsDomain, ItemModel, NutType
 
 
 class ItemsRouter:
