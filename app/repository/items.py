@@ -3,7 +3,7 @@ from botocore.exceptions import ClientError
 from boto3.resources.base import ServiceResource
 from boto3.dynamodb.conditions import Key, Attr
 
-from splayshapi.domain.nuttype import NutType
+from app.domain.nuttype import NutType
 
 
 class ItemsRepository:

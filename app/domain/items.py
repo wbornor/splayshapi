@@ -5,8 +5,8 @@ from pydantic import BaseModel
 from pydantic.types import UUID4
 from typing import List, Optional
 
-from splayshapi.domain.nuttype import NutType
-from splayshapi.repository.items import ItemsRepository
+from app.domain.nuttype import NutType
+from app.repository.items import ItemsRepository
 
 
 class ItemModel(BaseModel):
