@@ -43,8 +43,8 @@ jobs:
         id: creds
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: $AWS_CICD_ROLE_ARN
-          aws-region: $AWS_REGION
+          role-to-assume: "$AWS_CICD_ROLE_ARN"
+          aws-region: "$AWS_REGION"
 
       - name: Configure environment name
         id: env-name
@@ -63,7 +63,7 @@ jobs:
           sam deploy \
           --no-confirm-changeset \
           --no-fail-on-empty-changeset \
-          --stack-name ${{ steps.env-name.outputs.environment }} \
+          --stack-name "${{ steps.env-name.outputs.environment }}" \
           --s3-bucket "$AWS_CICD_BUCKET" \
           --capabilities CAPABILITY_IAM \
           --region "$AWS_REGION"
