@@ -150,6 +150,8 @@ Resources:
                   - lambda:AddPermission
                   - lambda:RemovePermission
                   - lambda:InvokeFunction
+                  - lambda:TagResource
+                  - lambda:CreateFunctionUrlConfig
                 Resource:
                   - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${AppId}-*'
         - PolicyName: DeployLogGroups
@@ -234,6 +236,11 @@ Resources:
                   - cloudfront:DeleteCloudFrontOriginAccessIdentity
                   - cloudfront:ListCloudFrontOriginAccessIdentities
                 Resource: '*'
+              - Sid: ServerlessTransforms
+                Effect: Allow
+                Action:
+                  - "cloudformation:CreateChangeSet"
+                Resource: "arn:aws:cloudformation:us-east-1:aws:transform/Serverless-2016-10-31"
         - PolicyName: DeployLambdaExecutionRoles
           PolicyDocument:
             Version: '2012-10-17'
@@ -267,6 +274,8 @@ Resources:
                 Resource:
                   - !Sub 'arn:aws:apigateway:${AWS::Region}::/apis'
                   - !Sub 'arn:aws:apigateway:${AWS::Region}::/apis/*'
+                  - !Sub 'arn:aws:apigateway:${AWS::Region}::/restapis'
+                  - !Sub 'arn:aws:apigateway:${AWS::Region}::/restapis/*'
         - PolicyName: DeployEventBridge
           PolicyDocument:
             Version: '2012-10-17'
