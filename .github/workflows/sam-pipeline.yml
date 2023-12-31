@@ -19,7 +19,7 @@ on:
 env:
   AWS_REGION: us-east-1
   AWS_ACCOUNT_ID: 796019718156
-  AWS_CICD_ROLE_ARN: arn:aws:iam::$AWS_ACCOUNT_ID:role/splayshapi-cicd-Role-I6ZfsEHvFThf
+  AWS_CICD_ROLE_ARN: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/splayshapi-cicd-Role-I6ZfsEHvFThf
   AWS_CICD_BUCKET: ${{ github.organization }}-${{ github.repository }}-deployment-bucket
 
 jobs:
@@ -34,10 +34,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - uses: actions/setup-python@v2
-
-      - uses: aws-actions/setup-sam@v1
 
       - name: Configure AWS credentials
         id: creds
@@ -55,11 +51,20 @@ jobs:
           echo "Environment name: $ENVIRONMENT"
           echo "environment=$ENVIRONMENT" >> $GITHUB_OUTPUT
           
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+
+      - name: Setup SAM
+        uses: aws-actions/setup-sam@v1
+          
       # sam build
-      - run: sam build --use-container
+      - name: SAM Build
+        run: sam build --use-container
 
       # sam deploy
-      - run: |
+      - name: SAM Deploy
+        run: |
           sam deploy \
           --no-confirm-changeset \
           --no-fail-on-empty-changeset \
