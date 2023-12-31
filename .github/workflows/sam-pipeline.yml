@@ -43,8 +43,8 @@ jobs:
         id: creds
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: "$AWS_CICD_ROLE_ARN"
-          aws-region: "$AWS_REGION"
+          role-to-assume: ${{ env.AWS_CICD_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Configure environment name
         id: env-name
