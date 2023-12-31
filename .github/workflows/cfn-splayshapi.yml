@@ -1,0 +1,46 @@
+name: Deploy splayshapi Cloudformation Resources
+
+on:
+  workflow_dispatch:
+    inputs:
+      region:
+        description: 'AWS Region'
+        required: true
+        default: 'us-east-1'
+
+jobs:
+  cluster:
+    name: Deploy stack to AWS
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCOUNT: "796019718156"
+      AWS_REGION: "us-east-1"
+    outputs:
+      env-name: ${{ steps.env-name.outputs.environment }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        id: creds
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::$AWS_ACCOUNT:role/splayshapioidc-Role-G2VzLFsqmwcR
+          aws-region: $AWS_REGION
+
+      - name: Configure environment name
+        id: env-name
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          ENVIRONMENT=`echo $REPO | tr "/" "-"`
+          echo "Environment name: $ENVIRONMENT"
+          echo "environment=$ENVIRONMENT" >> $GITHUB_OUTPUT
+
+      - name: Deploy splayshapi aws resources
+        id: splayshapi
+        uses: aws-actions/aws-cloudformation-github-deploy@master
+        with:
+          name: ${{ steps.env-name.outputs.environment }}-splayshapi
+          template: "file:///infra/cfn-splayshapi.yml"
+          no-fail-on-empty-changeset: "1"

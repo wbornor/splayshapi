@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "GitHubOrg",
+    "ParameterValue": "wbornor"
+  },
+  {
+    "ParameterKey": "RepositoryName",
+    "ParameterValue": "splayshapi"
+  }
+]
