@@ -17,9 +17,10 @@ on:
         default: 'dev'
 
 env:
+  APP_ID: wbornor-splayshapi
   AWS_REGION: us-east-1
   AWS_CICD_ROLE_ARN: arn:aws:iam::796019718156:role/splayshapi-cicd-DeployerRole-VSSNyHJoktkS
-  AWS_CICD_BUCKET: ${{ github.organization }}-${{ github.repository }}-deployment-bucket
+  AWS_CICD_BUCKET: wbornor-splayshapi-deployment-bucket
 
 jobs:
   stack:
@@ -28,8 +29,6 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    outputs:
-      env-name: ${{ steps.env-name.outputs.environment }}
     steps:
       - name: Configure AWS credentials
         id: creds
@@ -40,16 +39,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: Configure environment name
-        id: env-name
-        env:
-          REPO: ${{ github.repository }}
-        run: |
-          ENVIRONMENT=`echo $REPO-${{ github.event.inputs.environment }} | tr "/" "-" `
-          echo "Environment name: $ENVIRONMENT"
-          echo "environment=$ENVIRONMENT" >> $GITHUB_OUTPUT
-          
 
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -67,7 +56,7 @@ jobs:
           sam deploy \
           --no-confirm-changeset \
           --no-fail-on-empty-changeset \
-          --stack-name "${{ steps.env-name.outputs.environment }}" \
+          --stack-name "$APP_ID-${{ github.event.inputs.environment }}" \
           --s3-bucket "$AWS_CICD_BUCKET" \
           --capabilities CAPABILITY_IAM \
           --region "$AWS_REGION"
