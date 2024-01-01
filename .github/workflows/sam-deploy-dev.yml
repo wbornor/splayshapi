@@ -11,6 +11,7 @@ jobs:
     secrets: inherit
     permissions:
       id-token: write
+      contents: read
     with:
       region: us-east-1
       environment: dev
