@@ -34,7 +34,7 @@ Resources:
                 - dynamodb:Query
                 - dynamodb:Scan
                 - dynamodb:GetItem
-              Resource: 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/splayshdb.*.items'
+              Resource: "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/splayshdb.*.items*"
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
