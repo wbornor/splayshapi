@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - develop
+  workflow_dispatch:
+    inputs:
+      region:
+        description: 'AWS Region'
+        required: true
+        type: string
+        default: 'us-east-1
 
 jobs:
   deploy:
