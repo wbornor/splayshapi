@@ -2,13 +2,13 @@ from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 from mangum import Mangum
 
-
-from app.internal.db import initialize_db
 from app.domain.items import ItemsDomain
+from app.internal.db import initialize_db
 from app.repository.items import ItemsRepository
 from app.routers.items import ItemsRouter
 
-app = FastAPI(root_path="/Prod")
+# app = FastAPI(root_path="/Prod")
+app = FastAPI()
 
 lambda_handler = Mangum(app, lifespan="off")
 
