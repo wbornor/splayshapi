@@ -8,7 +8,7 @@ from app.domain.items import ItemsDomain
 from app.repository.items import ItemsRepository
 from app.routers.items import ItemsRouter
 
-app = FastAPI()
+app = FastAPI(root_path="/Prod")
 
 lambda_handler = Mangum(app, lifespan="off")
 
