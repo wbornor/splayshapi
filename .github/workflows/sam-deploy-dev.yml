@@ -7,9 +7,6 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger SAM Pipeline
-        uses: wbornor/splayshapi/.github/workflows/sam-pipeline.yml@main
-        with:
-          environment: dev
+    uses: .github/workflows/sam-pipeline.yml
+    with:
+      environment: dev
