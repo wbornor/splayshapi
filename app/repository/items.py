@@ -9,7 +9,7 @@ from app.domain.nuttype import NutType
 class ItemsRepository:
 
     def __init__(self, db: ServiceResource) -> None:
-        self.__db = db  # db resource will be injected when this repository is created in the app.py
+        self.__db = db
         self.__TABLE_ITEM_NAME = 'splayshdb.dev.items'  # todo: dynamic env
         self.__INDEX_ITEM_ISPUBLIC_CREATEDATE_NAME = 'item-ispublic-createdate'
         self.__INDEX_ITEM_NUT_CREATEDATE_NAME = 'item-nut-createdate'
