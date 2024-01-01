@@ -7,6 +7,6 @@ on:
 
 jobs:
   deploy:
-    uses: .github/workflows/sam-pipeline.yml
+    uses: ./.github/workflows/sam-pipeline.yml
     with:
       environment: dev
