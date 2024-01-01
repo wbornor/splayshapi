@@ -33,7 +33,7 @@ def my_schema():
         "version": DOCS_VERSION,
         "description": "REST Interface for Splaysh",
         "servers": [
-            {"url": "https://merymlbcs3.execute-api.us-east-1.amazonaws.com/Prod"}
+            {"url": "https://merymlbcs3.execute-api.us-east-1.amazonaws.com/Prod", "description": "Dev environment"}
         ],
         "license": {
             "name": "Apache 2.0",

@@ -10,7 +10,7 @@ class ItemsRouter:
 
     @property
     def router(self):
-        api_router = APIRouter(prefix='/items', tags=['items'])
+        api_router = APIRouter(prefix='/Prod/items', tags=['items'])
 
         @api_router.get('/', summary='List the latest items')
         def index_route() -> list[ItemModel]:

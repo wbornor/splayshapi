@@ -20,6 +20,21 @@ Resources:
             Method: ANY
       FunctionUrlConfig:
         AuthType: NONE
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+              Resource: '*'
+        - Statement:
+            - Effect: Allow
+              Action:
+                - dynamodb:Query
+                - dynamodb:Scan
+                - dynamodb:GetItem
+              Resource: 'splayshdb.*.items'
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
