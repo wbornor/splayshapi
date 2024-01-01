@@ -1,4 +1,4 @@
-name: Deploy SAM - DEV
+name: Deploy AWS SAM - DEV
 
 on:
   workflow_dispatch:

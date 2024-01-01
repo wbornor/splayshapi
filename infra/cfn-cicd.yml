@@ -152,6 +152,7 @@ Resources:
                   - lambda:InvokeFunction
                   - lambda:TagResource
                   - lambda:CreateFunctionUrlConfig
+                  - lambda:DeleteFunctionUrlConfig
                 Resource:
                   - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${AppId}-*'
         - PolicyName: DeployLogGroups
