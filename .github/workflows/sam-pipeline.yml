@@ -57,7 +57,7 @@ jobs:
           sam deploy \
           --no-confirm-changeset \
           --no-fail-on-empty-changeset \
-          --stack-name "$APP_ID-${{ github.event.inputs.environment }}" \
+          --stack-name "$APP_ID-${{ inputs.environment }}" \
           --role-arn "$AWS_SAM_EXECUTION_ROLE_ARN" \
           --s3-bucket "$AWS_CICD_BUCKET" \
           --capabilities CAPABILITY_IAM \
