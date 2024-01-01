@@ -1,0 +1,15 @@
+name: Deploy SAM - DEV
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger SAM Pipeline
+        uses: wbornor/splayshapi/.github/workflows/sam-pipeline.yml@main
+        with:
+          environment: dev
