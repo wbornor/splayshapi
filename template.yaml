@@ -6,9 +6,10 @@ Resources:
   SplayshAPIFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: app/
-      Handler: main.lambda_handler
+      CodeUri: ./
+      Handler: app.main.lambda_handler
       Runtime: python3.11
+      Timeout: 10
       Architectures:
         - x86_64
       Events:
