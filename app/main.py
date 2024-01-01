@@ -3,7 +3,7 @@ from fastapi.openapi.utils import get_openapi
 from mangum import Mangum
 
 
-from app.repository.db import initialize_db
+from app.internal.db import initialize_db
 from app.domain.items import ItemsDomain
 from app.repository.items import ItemsRepository
 from app.routers.items import ItemsRouter
