@@ -9,4 +9,5 @@ jobs:
   deploy:
     uses: ./.github/workflows/sam-pipeline.yml
     with:
+      region: us-east-1
       environment: dev

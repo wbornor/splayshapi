@@ -1,17 +1,15 @@
-name: Deploy AWS SAM Resources
+name: Deploy AWS SAM Resources (Reusable)
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       region:
         description: 'AWS Region'
         required: true
+        type: string
         default: 'us-east-1'
       environment:
-        type: choice
-        options:
-          - dev
-          - prd
+        type: string
         description: 'Environment (dev or prd)'
         required: true
         default: 'dev'
